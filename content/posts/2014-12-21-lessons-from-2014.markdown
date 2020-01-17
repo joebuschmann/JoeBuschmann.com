@@ -1,0 +1,58 @@
+---
+layout: post
+title: Lessons from 2014
+date: '2014-12-21 15:18:03'
+tags:
+- best-practices-2
+- automation
+---
+
+2014 has been a fantastic year for me professionally. I spent the majority of the year working on a green field project with a great group of co-workers. I was the Scrummaster for a talented team and wrote a lot of Angular.js and Javascript. Ultimately the project was cancelled, and its members were merged into another group. While disappointing, it led me to a new opportunity as a Product Owner and lead architect for a team tasked with creating a test framework built on [Specflow](http://www.specflow.org). The project is wrapping up this week and represents a foundational first step toward a new Agile development process based on acceptance tests ([Acceptance Test-Driven Development](http://en.wikipedia.org/wiki/Acceptance_test-driven_development).)
+
+These were great opportunities for my personal and professional growth, and I'll always be grateful for them. They pushed my technical skills as well as my soft skills. Below are the lessons I learned and will carry with me into 2015.
+
+##### Automate Everything
+
+Developers are told to automate as much as possible from the moment their career begins. I had always known this but had never really internalized it. Automation was never a part of my daily coding routine. Until this year.
+
+Instead of automating only when I was annoyed by a repetitive task, it became a part of my work from the beginning of a user story. I automated common tasks, like developer workstation setup and IIS configuration. I created more batch files and bash scripts than ever before, and the productivity increases were staggering. It also reduced the amount of documentation I had to write. A couple of paragraphs on how to configure IIS became a single line: Run this script.
+
+Automation is now ingrained in my routine, a reflex, rather than something I have to remind myself to do.
+
+##### Be a Multiplier
+
+During my final review, my manager spoke about being a "multiplier". I hadn't heard the term before so I looked it up. In short, a multiplier not only works on their own productivity but also increases the productivity of those around them. Camille Fournier, CTO of Rent the Runway, [gave a great talk](https://www.youtube.com/watch?v=jGPrU15GuSw) explaining the concept.
+
+It turns out I had some habits of a multiplier without knowing it. I had increased team productivity by:
+
+* Automating tasks to make them easier for my teammates.
+* Holding bi-weekly architecture reviews for the team to share knowledge.
+* Giving team members opportunities to work on user stories where they learned something new.
+
+Now that I'm aware of the concept, I'm going to find more ways to become a better multiplier.
+
+##### Fragile Tests Kill Confidence
+
+During the green field project I mentioned earlier, I was tasked with getting continuous system tests running using [Bamboo](https://www.atlassian.com/software/bamboo/), Atlassian's continuous build server. The tests were pretty complex. They involved web services developed in North America talking to a biller maintained by a team in Australia. For about a month the tests were fragile and couldn't be counted on to run successfully more than a few times in a row. Working across several time zones delayed the fixes. It soon became apparent to other developers they couldn't rely on the tests due to the false negatives. So they were ignored. Eventually they were fixed and reliable, but by then it was too late. No one took them seriously.
+
+My next project was to develop continuous system tests for a security service that another team was heavily refactoring. When the tests came online, they failed intermittently due to setup issues. I had flashbacks to my last project, so I dropped everything and spent a week with two other team members to fix the fragility problem. We worked through the issues, and today the tests are reliable and trustworthy.
+
+I learned the hard way: fragile tests kill confidence and are ignored. Fix them immediately or take them offline.
+
+##### Technical Skills
+
+At the end of 2013, I made a resolution to learn Javascript and Regular Expressions. I'm embarrassed to admit I made it 14 years into my career without at least being competent with both skills. With 2014 coming to a close, I'm happy to write that these technical skills are a part of my repertoire along with some new ones.
+
+* Javascript
+* Regular expressions
+* Angular.js
+* Batch and BASH scripting
+* Git source control
+
+##### Looking Ahead to 2015
+
+With 2014 almost behind me, it's time to look ahead to the coming year. I've been thinking about professional development goals for 2015, and I'd like to break away from the Windows/.NET world and try something new. The [Rust programming language](http://www.rust-lang.org/) has been getting more mentions lately. It is designed to be an alternative to C++ that maintains the speed of C++ but adds safe memory management, concurrency, and cool language features like pattern matching. By this time next year, I'd like to have at least one Rust project up on Github.
+
+My second goal is more personal. My daughter turned five in October and is showing interest in reading and numbers. There are a number of resources for teaching kids to code, [Scratch](http://scratch.mit.edu/) in particular, and she seems ready to start writing some programs of her own. I'd like to help her create a Scratch game and perhaps get it out on Github. That would be a good way to start a career in programming.
+
+Well, that's it for now. Enjoy the holidays, and I'll see you in 2015!

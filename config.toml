@@ -1,3 +1,35 @@
-baseURL = "http://example.org/"
+baseURL = "https://joebuschmann.com"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Joe Buschmann"
+theme = "kiss"
+copyright = "&copy; Joe Buschmann 2020"
+
+disqusShortname = "joebuschmann"
+googleAnalytics = "UA-64657873-1"
+paginate = 6
+enableRobotsTXT = true
+
+[params.rss] # Adding this tag enables RSS feed
+includeContent = true # Includes whole content in rss
+authorName = "Joe Buschmann" # Author full name
+authorEmail = "joseph.buschmann@gmail.com" # Author email
+
+[params.assets]
+customCSS = ["css/custom.css"]
+
+[params.social]
+twitter = "joebuschmann"
+github = "joebuschmann"
+email = "joseph.buschmann@gmail.com"
+linkedin = "joebuschmann"
+facebook = "joe.buschmann"
+rss = "index.xml" # Add this to show RSS button in social.
+
+[params.social.config]
+platforms = ["linkedin","github","facebook","twitter","email"]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[blackfriday]
+hrefTargetBlank = true

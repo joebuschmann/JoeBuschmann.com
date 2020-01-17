@@ -1,0 +1,46 @@
+---
+layout: post
+title: About Me
+date: '2015-01-19 15:07:38'
+published: false
+---
+
+Hi, my name is Joe Buschmann, and I'm a software developer living and working in Chicagoland. I build enterprise services and applications using a mix of open source software and Microsoft technology. My experience ranges from front end development with **HTML+React+Node** to building services on the **.NET stack** to automating CI and deployment with **Jenkins and Bamboo**.
+
+You can find me on <a href="http://www.linkedin.com/in/joebuschmann">LinkedIn</a>, <a social-link="twitter">twitter</a>, <a social-link="github">github</a>, and <a social-link="facebook">facebook</a>.
+
+###### I believe in...
+
+__Continuously adding value__ and helping my team improve.
+
+__Enabling software platforms__ by writing code that is loosely coupled with well defined integration points.
+
+__Keeping software design simple and effective__.
+
+__Automating tasks__ as part of my daily development habits.
+
+__Developing automated tests__ as part of my daily work.
+
+__Documenting my work__ to help others learn.
+
+###### Skills
+
+* C# Programming Language
+* .NET Development
+* Creating REST services with with Nancy FX and IIS
+* BDD Testing with [Specflow](http://www.specflow.org/)
+* JavaScript
+* Web development with React, Bootstrap, and Node
+* JS unit testing with Jasmaine and Jest
+* Git
+* CI with Jenkins and Bamboo
+* Visual Studio 20XX
+* Resharper
+* SQL Server and TSQL
+* Batch and shell scripting
+* VB6 (how I got my start)
+
+###### Education
+
+* __BS Physics__, University of Kentucky, Lexington, KY, 1999, _Summa Cum Laude_
+* __BS, Mathematics__, University of Kentucky, Lexington, KY, 2000, _Summa Cum Laude_
