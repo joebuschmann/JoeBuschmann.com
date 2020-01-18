@@ -1,6 +1,6 @@
 [submodule "themes/kiss"]
 	path = themes/kiss
 	url = https://github.com/ribice/kiss.git
-[submodule "public"]
-	path = public
+[submodule "joebuschmann.github.io"]
+	path = joebuschmann.github.io
 	url = https://github.com/joebuschmann/joebuschmann.github.io.git
