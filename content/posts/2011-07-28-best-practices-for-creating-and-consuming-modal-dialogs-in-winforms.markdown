@@ -8,7 +8,7 @@ tags:
 - winforms
 ---
 
-This is an article I wrote a few years ago after seeing some bad coding practices around modal dialogs in WinForms.┬á Bad habits like explicitly closing the dialog form and using custom OK/Cancel flags irked me, so I came up with some best practices.┬á I hope you find them useful.
+This is an article I wrote a few years ago after seeing some bad coding practices around modal dialogs in WinForms. Bad habits like explicitly closing the dialog form and using custom OK/Cancel flags irked me, so I came up with some best practices. I hope you find them useful.
 
 **Tip 1: Set the AcceptButton and CancelButton properties**
 
