@@ -11,7 +11,7 @@ tags:
 
 Like many others I lead an ordinary life. Up at dawn, get the kids ready, then my wife and I head to work. To spice up the story of my life, I enlisted the help of Lieutenant Frank Drebin. Follow along as the Police Squad operative narrates my life with bad puns and worse metaphors.
 
-![Lieutenant Frank Drebin, Police Squad!](http://media.joebuschmann.com/frank_drebin_1.jpg)
+![Lieutenant Frank Drebin, Police Squad!](/images/frank_drebin_1.jpg)
 
 #### Dawn
 
@@ -103,7 +103,7 @@ I had to rethink my plan before the night got away. I turned around and looked u
 Seduction ain't easy.
 
 <div style="width: 100%; text-align: center;">
-	<img src="http://media.joebuschmann.com/frank_drebin_2.jpg" alt="Det Frank Drebin, Police Squad!" width="auto" style="border: 2px solid #EBF2F6; border-radius: 100%; padding: 0px;" />
+	<img src="images/frank_drebin_2.jpg" alt="Det Frank Drebin, Police Squad!" width="auto" style="border: 2px solid #EBF2F6; border-radius: 100%; padding: 0px;" />
 </div>
 
 <br />

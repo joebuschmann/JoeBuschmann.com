@@ -23,4 +23,4 @@ Other features include:
 * Git support for Skydrive files.
 * Simple registry restores.
 
-Just when I think I've seen it all, something like this comes along and blows my mind. For more details, check out the [press release](http://media.joebuschmann.com/april_fools.jpg).
+Just when I think I've seen it all, something like this comes along and blows my mind. For more details, check out the [press release](/images/april_fools.jpg).

@@ -6,7 +6,7 @@ tags:
 - best-practices-2
 ---
 
-![Where are your DB create scripts?](http://media.joebuschmann.com/where_are_your_db_create_scripts.png)
+![Where are your DB create scripts?](/images/where_are_your_db_create_scripts.png)
 
 The software development group at my office has a shared database that developers connect to for their daily work. In the last few months, the number of developers has doubled, and the practice of using the shared database has not scaled well. It has caused frustration as members of one team make schema changes before another team can consume them. The resulting breakages has led to lost productivity. To make matters worse, the same database serves as a reference for the daily migration process. There's always a chance that a junior developer (or anyone really) could make a mistake and kill migrations.
 

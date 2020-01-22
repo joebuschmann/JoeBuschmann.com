@@ -49,4 +49,4 @@ Now the Lightning component will appear when editing or creating a record.
 
 #### Issues with Force Events
 
-There is one issue with this approach. If the Lightning component uses events like **force:showToast** or **force:navigateToObjectHome**, they will not fire in VisualForce. The code to load an application event `$A.get('e.force:navigateToObjectHome')` returns null. Force events are common in Lightning apps so this is a serious issue. Fortunately, there is a work-around which is the subject of my [next post](http://joebuschmann.com/salesforce-lightning-navigation-events-in-a-visualforce-page).
+There is one issue with this approach. If the Lightning component uses events like **force:showToast** or **force:navigateToObjectHome**, they will not fire in VisualForce. The code to load an application event `$A.get('e.force:navigateToObjectHome')` returns null. Force events are common in Lightning apps so this is a serious issue. Fortunately, there is a work-around which is the subject of my [next post](/posts/2017-01-16-salesforce-lightning-navigation-events-in-a-visualforce-page).

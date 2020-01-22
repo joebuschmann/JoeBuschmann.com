@@ -53,4 +53,4 @@ nunit-console.exe /xml:results.xml some\path\tests.dll
 
 ### Further Reading
 
-For more details on getting started with SpecFlow, check out the [excellent documentation](https://specflow.org/documentation/). I recommend reading it once when getting started and again after you've had some experience. Also, check out my [blog posts on SpecFlow](https://joebuschmann.com/tag/specflow/).
+For more details on getting started with SpecFlow, check out the [excellent documentation](https://specflow.org/documentation/). I recommend reading it once when getting started and again after you've had some experience. Also, check out my [blog posts on SpecFlow](/tags/specflow).

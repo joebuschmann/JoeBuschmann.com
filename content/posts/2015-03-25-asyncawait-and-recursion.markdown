@@ -16,10 +16,10 @@ What keeps it from failing is the use of the `await` keyword when calling `DoWor
 
 First recursive call:
 
-![Stack Trace After Recursive Call](http://media.joebuschmann.com/async_await_stack_trace1.png)
+![Stack Trace After Recursive Call](/images/async_await_stack_trace1.png)
 
 After awaiting:
 
-![Stack Trace After Awaiting](http://media.joebuschmann.com/async_await_stack_trace2.png)
+![Stack Trace After Awaiting](/images/async_await_stack_trace2.png)
 
 In this case, Resharper was correct to report that the method was recursive in all paths, but the use of the await keyword prevents a stack overflow exception.

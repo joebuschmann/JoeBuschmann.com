@@ -26,11 +26,11 @@ A prime example of this is **ui:inputDateTime**. If you use it in conjunction wi
 
 The slds-input class forces a width of 100% on the input textboxes which pushes the calendar icons to the next line.
 
-![ui:inputDateTime](http://media.joebuschmann.com/ui-datetime-no-fix-1.png)
+![ui:inputDateTime](/images/ui-datetime-no-fix-1.png)
 
 Even worse, when you click the icon for the time selection, the list doesn't appear under the textbox like it should. Instead it is positioned to the far left.
 
-![ui:inputDateTime](http://media.joebuschmann.com/ui-datetime-no-fix-2.png)
+![ui:inputDateTime](/images/ui-datetime-no-fix-2.png)
 
 The fixes turn out to be straightforward, but there are many annoyances with these components. You'll find yourself tweaking them to get the look just right.
 
@@ -99,7 +99,7 @@ Using the new component gives you the fixes for free, and the default SLDS class
 
 Ahhh. Much better!
 
-![ui:inputDateTime](http://media.joebuschmann.com/ui-datetime-fix.png)
+![ui:inputDateTime](/images/ui-datetime-fix.png)
 
 #### The Lightning Namespace
 

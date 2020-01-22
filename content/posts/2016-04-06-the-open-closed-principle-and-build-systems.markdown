@@ -39,7 +39,7 @@ Below is a screen shot from one of my Jenkins jobs. It's a CI build for a web ap
 
 In this example, *pre-build.build* runs first and restores dependencies via NuGet. After the source is compiled by MSBuild, *test.build* runs the tests. There are additional scripts for packaging and deployment not visible in the screen shot. They run after the tests complete successfully.
 
-![Jenkins Job](http://media.joebuschmann.com/jenkins.png)
+![Jenkins Job](/images/jenkins.png)
 
 Below is the pre-build NANT script.
 
@@ -47,7 +47,7 @@ Below is the pre-build NANT script.
 
 As you can see, developers can modify the build steps without having access to Jenkins. In this case, the project has a Build directory at its root that contains the NANT build scripts. They act as extension points for the build job.
 
-![Build Directory](http://media.joebuschmann.com/build_dir.png)
+![Build Directory](/images/build_dir.png)
 
 This approach allows for a clear separation of concerns. System administrators handle security and performance on the Jenkins server/cluster, and application developers focus on the specifics of their application's build process.
 

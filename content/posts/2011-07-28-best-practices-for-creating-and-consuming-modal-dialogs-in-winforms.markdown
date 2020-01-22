@@ -14,13 +14,13 @@ This is an article I wrote a few years ago after seeing some bad coding practice
 
 Windows Forms have two properties, *AcceptButton* and *CancelButton*, for determining what should be done when the user presses the Enter or Escape keys. You can set the *AcceptButton* property value to the name of an existing button on the form, normally an OK or Yes button, to fire that button's click event when the user presses the Enter key. Similarly, you can set the *CancelButton* property to an Cancel or No button to fire that button's click event when the user presses the Escape key.
 
-![AcceptButton and CancelButton properties](http://media.joebuschmann.com/formproperties.png)
+![AcceptButton and CancelButton properties](/images/formproperties.png)
 
 **Tip 2: Use a Button's DialogResult property when applicable**
 
 The Button class has a property, *DialogResult*, that can be set to one of several values in the `System.Windows.Forms.DialogResult` enumeration. This value is returned by the `Form.ShowDialog()` method indicating the result of the modal dialog operation when the button is clicked. For example, you can set this property to `DialogResult.OK` for an OK button and `DialogResult.Cancel` for a Cancel button.
 
-![DialogResult property](http://media.joebuschmann.com/formproperties2.png)
+![DialogResult property](/images/formproperties2.png)
 
 **Tip 3: Don't explicitly hide the form**
 

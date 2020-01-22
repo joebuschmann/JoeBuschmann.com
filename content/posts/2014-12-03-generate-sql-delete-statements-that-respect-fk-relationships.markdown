@@ -13,7 +13,7 @@ I recently ran into this issue with a SQL Server database. I needed to trim data
 
 For example, given the simple table relationships below.
 
-![Order table diagram](http://media.joebuschmann.com/order_table_diagram.png)
+![Order table diagram](/images/order_table_diagram.png)
 
 When I compile the program to GenerateDeleteStatements.exe and run the command:
 

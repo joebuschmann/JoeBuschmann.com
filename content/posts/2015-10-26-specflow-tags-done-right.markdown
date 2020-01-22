@@ -8,7 +8,7 @@ tags:
 - c
 ---
 
-In a [previous post](http://joebuschmann.com/an-introduction-to-scoped-bindings-in-specflow/), I covered scoped bindings in SpecFlow and ended with an example of how *not* to use tags. In this post, I'll cover the "right way" and demonstrate how to avoid [coupling features to step definitions](https://github.com/cucumber/cucumber/wiki/Feature-Coupled-Step-Definitions-%28Antipattern%29). But first, a quick primer on tags.
+In a [previous post](/posts/2015-10-22-an-introduction-to-scoped-bindings-in-specflow/), I covered scoped bindings in SpecFlow and ended with an example of how *not* to use tags. In this post, I'll cover the "right way" and demonstrate how to avoid [coupling features to step definitions](https://github.com/cucumber/cucumber/wiki/Feature-Coupled-Step-Definitions-%28Antipattern%29). But first, a quick primer on tags.
 
 #### What Are Tags?
 

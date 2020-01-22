@@ -127,4 +127,4 @@ A nice technique is to create a look-up table in the background section to map e
 
 ----
 
-For more information on SpecFlow best practices, check out [my previous posts](http://joebuschmann.com/tag/specflow/) as well as the excellent [SpecFlow documentation](http://www.specflow.org/documentation/).
+For more information on SpecFlow best practices, check out [my posts](/tags/specflow) as well as the excellent [SpecFlow documentation](http://www.specflow.org/documentation/).

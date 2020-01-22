@@ -56,4 +56,4 @@ Or use tags.
 
 While this example works well for demonstrating the power of scoped bindings, I generally avoid coupling step definitions to Gherkin in all but the simplest features. In fact, this type of coupling has been identified as an [anti-pattern](https://github.com/cucumber/cucumber/wiki/Feature-Coupled-Step-Definitions-%28Antipattern%29).
 
-So how would I fix this? That's the subject of [my next post](http://joebuschmann.com/specflow-tags-done-right/). In the meantime, you can read more about scoped bindings in the [SpecFlow documentation](http://www.specflow.org/documentation/Scoped-Bindings/).
+So how would I fix this? That's the subject of [my next post](/posts/2015-10-26-specflow-tags-done-right). In the meantime, you can read more about scoped bindings in the [SpecFlow documentation](http://www.specflow.org/documentation/Scoped-Bindings/).
