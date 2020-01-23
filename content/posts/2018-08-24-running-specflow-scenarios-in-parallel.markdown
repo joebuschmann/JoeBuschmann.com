@@ -16,7 +16,7 @@ To enable parallel execution, you must use a test runner that supports it. Avail
 
 <script src="https://gist.github.com/joebuschmann/f47fab40bb754d7d2eae1765fc9b118c.js"></script>
 
-You can work around this limitation by using dependency injection. In fact, you should use DI anyway for a cleaner scalable code base. See my post on [Reusable Bindings in SpecFlow](/posts/2018-08-13-reusable-bindings-in-specflow) for more details on leveraging SpecFlow's IoC container.
+You can work around this limitation by using dependency injection. In fact, you should use DI anyway for a cleaner scalable code base. See my post on [Reusable Bindings in SpecFlow](/posts/2018/08/reusable-bindings-in-specflow) for more details on leveraging SpecFlow's IoC container.
 
 <script src="https://gist.github.com/joebuschmann/269873f3149ab7895a06cfa3c0b6849a.js"></script>
 

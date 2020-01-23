@@ -7,7 +7,7 @@ tags:
 - javascript
 ---
 
-In a [previous post](/posts/2016-06-16-react-by-example-mixins) I covered an example of a React **mixin** which I called ClickAway that detected clicks anywhere outside of a component. I also mentioned mixins are not React's preferred method of reuse. Composition with components is the way to go, and [mixins are on the way out](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750#.rdurthwrj).
+In a [previous post](/posts/2016/06/react-by-example-mixins) I covered an example of a React **mixin** which I called ClickAway that detected clicks anywhere outside of a component. I also mentioned mixins are not React's preferred method of reuse. Composition with components is the way to go, and [mixins are on the way out](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750#.rdurthwrj).
 
 With this in mind, I decided to convert the ClickAway mixin into a component. I was skeptical about how clean the new implementation would be, but it turned out well. As you'll see, the equivalent component version better enables composition and is more explicit.
 

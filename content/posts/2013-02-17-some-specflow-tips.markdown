@@ -9,7 +9,7 @@ tags:
 
 UPDATE (11/18/2016):
 
->I've written a number of posts since this one was published that cover advanced SpecFlow topics like [composable steps](/posts/2015-09-22-refactoring-to-composable-specflow-steps), [tags done right](/posts/2015-10-26-specflow-tags-done-right), [managing state](/posts/2014-09-30-strategies-for-managing-state-in-specflow), [useful regex](/posts/2014-10-18-useful-regex-for-specflow-bindings), etc. For a list of all my SpecFlow writing, you can click on the [SpecFlow tag](/tags/specflow). SpecFlow is a fantastic tool that's changed the way I develop software, and I hope it does the same for you. Happy testing!
+>I've written a number of posts since this one was published that cover advanced SpecFlow topics like [composable steps](/posts/2015/09/refactoring-to-composable-specflow-steps), [tags done right](/posts/2015/10/specflow-tags-done-right), [managing state](/posts/2014/09/strategies-for-managing-state-in-specflow), [useful regex](/posts/2014/10/useful-regex-for-specflow-bindings), etc. For a list of all my SpecFlow writing, you can click on the [SpecFlow tag](/tags/specflow). SpecFlow is a fantastic tool that's changed the way I develop software, and I hope it does the same for you. Happy testing!
 
 <hr />
 
@@ -21,7 +21,7 @@ Although we're relatively new to SpecFlow, my group has identified some patterns
 
 UPDATE (10/21/2017):
 
->Using ScenarioContext to store state is no longer recommended. Instead use dependency injection to share state between steps and bindings. For more information, see my post on [strategies for managing state](/posts/2014-09-30-strategies-for-managing-state-in-specflow).
+>Using ScenarioContext to store state is no longer recommended. Instead use dependency injection to share state between steps and bindings. For more information, see my post on [strategies for managing state](/posts/2014/09/strategies-for-managing-state-in-specflow).
 
 <em>ScenarioContext.Current</em> is a singleton that provides contextual information about the test and executing scenario block as well as a dictionary data structure for storing test data between scenario blocks. Below is an example of retrieving an object, manipulating it, and stashing it back in ScenarioContext dictionary.
 

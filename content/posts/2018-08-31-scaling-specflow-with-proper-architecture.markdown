@@ -19,9 +19,9 @@ So you've written some tests using SpecFlow, and you're feeling good about test 
 
 ## Scaling SpecFlow
 
-* [Let's Start with the Basics](/posts/2018-08-08-specflow-basics)
-* [Gherkin Tips](/posts/2018-08-10-gherkin-tips)
-* [Taming Gherkin Tables](/posts/2018-08-10-working-effectively-with-specflow-tables)
-* [Reusable Bindings](/posts/2018-08-13-reusable-bindings-in-specflow)
-* [Running Scenarios in Parallel](/posts/2018-08-24-running-specflow-scenarios-in-parallel)
-* [The Step Definition Report](/posts/2018-08-31-specflow-step-definition-report)
+* [Let's Start with the Basics](/posts/2018/08/specflow-basics)
+* [Gherkin Tips](/posts/2018/08/gherkin-tips)
+* [Taming Gherkin Tables](/posts/2018/08/working-effectively-with-specflow-tables)
+* [Reusable Bindings](/posts/2018/08/reusable-bindings-in-specflow)
+* [Running Scenarios in Parallel](/posts/2018/08/running-specflow-scenarios-in-parallel)
+* [The Step Definition Report](/posts/2018/08/specflow-step-definition-report)

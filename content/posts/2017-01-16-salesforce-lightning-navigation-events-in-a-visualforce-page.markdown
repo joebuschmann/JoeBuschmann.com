@@ -8,7 +8,7 @@ tags:
 - lightning
 ---
 
-In my [previous post](/posts/2017-01-16-salesforce-lightning-hosting-a-component-in-visualforce), I covered how to use a Lightning component in a Visualforce (VF) page and mentioned an issue with navigation events. These events no longer work. The problem is VF pages are loaded into an iframe element in the Lightning Experience. Navigation events like *force:navigateToObjectHome* are handled by the one.app container in the parent frame. Events raised in the VF page stop at the iframe boundary and don't bubble up into the parent frame.
+In my [previous post](/posts/2017/01/salesforce-lightning-hosting-a-component-in-visualforce), I covered how to use a Lightning component in a Visualforce (VF) page and mentioned an issue with navigation events. These events no longer work. The problem is VF pages are loaded into an iframe element in the Lightning Experience. Navigation events like *force:navigateToObjectHome* are handled by the one.app container in the parent frame. Events raised in the VF page stop at the iframe boundary and don't bubble up into the parent frame.
 
 In this post, I discuss how to get navigation events working in a Lightning Out host like a VF page. My approach avoids the need to detect the host environment inside of a component. Instead, components continue to raise events as usual and are still decoupled from the environment. Events are handled explicitly in the Lightning Out host where the environment detection logic is isolated.
 

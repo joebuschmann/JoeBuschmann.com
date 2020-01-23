@@ -10,6 +10,9 @@ googleAnalytics = "UA-64657873-1"
 paginate = 6
 enableRobotsTXT = true
 
+[permalinks]
+posts = "/posts/:year/:month/:slug/"
+
 [params.rss] # Adding this tag enables RSS feed
 includeContent = true # Includes whole content in rss
 authorName = "Joe Buschmann" # Author full name
@@ -27,7 +30,7 @@ facebook = "joe.buschmann"
 rss = "index.xml" # Add this to show RSS button in social.
 
 [params.social.config]
-platforms = ["linkedin","github","facebook","twitter","email"]
+platforms = ["linkedin","github","facebook","twitter","email","rss"]
 
 [markup.goldmark.renderer]
 unsafe = true
