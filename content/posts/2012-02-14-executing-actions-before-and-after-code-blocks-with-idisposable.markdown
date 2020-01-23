@@ -3,9 +3,9 @@ layout: post
 title: Executing Actions Before and After Code Blocks with IDisposable
 date: '2012-02-14 21:06:32'
 tags:
-- c
+- c-sharp
 - best-practices-2
-- f
+- f-sharp
 ---
 
 <p>I ran into a scenario this week where a boolean field was being flipped temporarily to modify behavior elsewhere while a block of code was executing.&nbsp; I have seen this pattern mainly in WinForms applications where data are being loaded into controls, but their events need to be suppressed during the load.&nbsp; Afterward, the events should fire normally.</p> <p>Below is an example of this scenario.&nbsp; It is a Windows form with a single combobox.&nbsp; Whenever the selected value of the combobox changes, an expensive action is executed such as a database or service call.&nbsp; During the loading of the form data, the possible values of the combobox are added, and the first item is selected.&nbsp; This causes the expensive operation to execute unnecessarily.</p><pre class="csharpcode">    <span class="kwrd">public</span> <span class="kwrd">partial</span> <span class="kwrd">class</span> BeforeAndAfterTest : Form

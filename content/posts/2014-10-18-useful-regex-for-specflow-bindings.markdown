@@ -3,7 +3,7 @@ layout: post
 title: Useful Regex for SpecFlow Bindings
 date: '2014-10-18 10:20:35'
 tags:
-- c
+- c-sharp
 - specflow
 ---
 

@@ -1,9 +1,10 @@
 ---
 layout: post
 title: Creating Mocks with F# Object Expressions
+slug: creating-mocks-with-f-sharp-object-expressions
 date: '2011-10-13 19:59:54'
 tags:
-- f
+- f-sharp
 - mocks
 - object-expressions
 - unit-testing

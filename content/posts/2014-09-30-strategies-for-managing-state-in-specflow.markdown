@@ -3,7 +3,7 @@ layout: post
 title: Strategies for Managing State in SpecFlow
 date: '2014-09-30 18:40:52'
 tags:
-- c
+- c-sharp
 - specflow
 ---
 

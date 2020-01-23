@@ -3,7 +3,7 @@ layout: post
 title: Overusing Generics in .NET
 date: '2014-10-10 12:31:09'
 tags:
-- c
+- c-sharp
 - best-practices-2
 ---
 

@@ -4,7 +4,7 @@ title: A Short and Easy Introduction to .NET's Task Class
 date: '2015-12-09 22:09:29'
 tags:
 - net
-- c
+- c-sharp
 - async
 - parallel
 - task

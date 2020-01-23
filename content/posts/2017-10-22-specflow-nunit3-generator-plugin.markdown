@@ -4,7 +4,7 @@ title: SpecFlow NUnit3 Generator Plugin
 date: '2017-10-22 02:44:18'
 tags:
 - specflow
-- c
+- c-sharp
 ---
 
 I recently created a SpecFlow plugin to solve a peculiar problem with NUnit test code generation. The issue is SpecFlow will generate test code that doesn't compile when the .NET project containing the SpecFlow scenarios has a default namespace with the word NUnit. For example, if your project has the namespace `IntegrationTests.NUnit`, then you'll receive the following error when trying to build.

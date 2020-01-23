@@ -1,10 +1,11 @@
 ---
 layout: post
 title: Text Parsing with F#
+slug: text-parsing-with-f-sharp
 date: '2012-01-15 21:02:30'
 tags:
 - net
-- f
+- f-sharp
 - text-parsing
 ---
 

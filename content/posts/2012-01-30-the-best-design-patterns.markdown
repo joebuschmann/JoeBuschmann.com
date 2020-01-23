@@ -4,7 +4,7 @@ title: The Best Design Patterns
 date: '2012-01-30 20:38:44'
 tags:
 - net
-- c
+- c-sharp
 - best-practices-2
 - unit-testing
 - patterns

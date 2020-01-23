@@ -3,7 +3,7 @@ layout: post
 title: More SpecFlow Tips
 date: '2013-07-20 11:21:08'
 tags:
-- c
+- c-sharp
 - specflow
 ---
 

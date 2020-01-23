@@ -4,7 +4,7 @@ title: Reusable Bindings in SpecFlow
 date: '2018-08-13 13:44:33'
 tags:
 - specflow
-- c
+- c-sharp
 - gherkin
 - net
 ---

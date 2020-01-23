@@ -5,7 +5,7 @@ date: '2015-10-22 12:28:04'
 tags:
 - specflow
 - net
-- c
+- c-sharp
 ---
 
 One nice aspect of SpecFlow is the ability to scope bindings by feature title, scenario title, or tag. Normally bindings are global to the project, but a binding's scope can be restricted using the `Scope` attribute. I like to think of it as similar to the `private` and `public` class modifiers in C#.

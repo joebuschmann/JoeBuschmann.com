@@ -3,7 +3,7 @@ layout: post
 title: Ditch the Grids and Use DockPanels
 date: '2012-03-12 19:58:25'
 tags:
-- c
+- c-sharp
 - best-practices-2
 - winforms
 - wpf

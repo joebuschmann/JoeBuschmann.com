@@ -4,7 +4,7 @@ title: The Dangers of Mutable Data
 date: '2011-08-15 20:06:17'
 tags:
 - net
-- c
+- c-sharp
 ---
 
 I recently came across a bug in some C# code that would never have been a problem if the data structures being used were immutable. The data consisted of a .NET dictionary with an integer key and a list as a value. The details below have been changed to protect the guilty.

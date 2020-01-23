@@ -3,7 +3,7 @@ layout: post
 title: Singleton Access from a Container
 date: '2012-12-01 23:20:49'
 tags:
-- c
+- c-sharp
 - singleton
 ---
 

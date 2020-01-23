@@ -4,7 +4,7 @@ title: Tidying Up Code with C#'s Using Alias Directives
 date: '2015-08-18 21:52:34'
 tags:
 - net
-- c
+- c-sharp
 ---
 
 The C# language's [using alias directives](https://msdn.microsoft.com/en-us/library/aa664765%28v=vs.71%29.aspx) or namespace and type aliases provide a way to disambiguate between namespaces or types with the same name. For example, both the `System.Net` and `Nancy` libraries have a type named `HttpStatusCode`. If you happen to import both namespaces in a file, then the types need to be fully qualified or else the compiler will fail with the error:

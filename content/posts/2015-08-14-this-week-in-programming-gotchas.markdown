@@ -4,7 +4,7 @@ title: This Week in Programming Gotchas
 date: '2015-08-14 12:08:00'
 tags:
 - net
-- c
+- c-sharp
 - nancy
 - knockout-js
 ---

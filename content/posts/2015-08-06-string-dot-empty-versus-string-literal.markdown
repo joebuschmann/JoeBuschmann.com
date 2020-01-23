@@ -4,7 +4,7 @@ title: String.Empty Versus ""
 date: '2015-08-06 15:22:10'
 tags:
 - net
-- c
+- c-sharp
 - best-practices-2
 ---
 

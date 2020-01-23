@@ -4,7 +4,7 @@ title: Running SpecFlow Scenarios in Parallel
 date: '2018-08-24 22:48:34'
 tags:
 - specflow
-- c
+- c-sharp
 - net
 ---
 

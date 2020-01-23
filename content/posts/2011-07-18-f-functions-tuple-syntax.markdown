@@ -1,10 +1,11 @@
 ---
 layout: post
 title: 'F# Functions: Tuple Syntax'
+slug: f-sharp-functions-tuple-syntax
 date: '2011-07-18 19:35:42'
 tags:
 - net
-- f
+- f-sharp
 ---
 
 I'm relatively new to F# and functional programming and recently worked through an issue that had me perplexed. The issue was with creating functions with the "tuple syntax" versus the normal syntax of separating arguments by spaces.

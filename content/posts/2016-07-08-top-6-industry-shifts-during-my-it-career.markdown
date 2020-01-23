@@ -4,7 +4,7 @@ title: Top 6 Industry Shifts During My IT Career
 date: '2016-07-08 01:04:00'
 tags:
 - net
-- c
+- c-sharp
 - osx
 - firefox
 - chrome

@@ -3,7 +3,7 @@ layout: post
 title: Generate SQL Delete Statements That Respect FK Relationships
 date: '2014-12-03 21:00:00'
 tags:
-- c
+- c-sharp
 - sql
 ---
 

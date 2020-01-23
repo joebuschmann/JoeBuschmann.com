@@ -5,7 +5,7 @@ date: '2015-09-22 12:15:32'
 tags:
 - net
 - specflow
-- c
+- c-sharp
 ---
 
 I've seen some pretty bad SpecFlow code. Code that seems to violate every good practice out there. Poor reuse. Copy and paste everywhere. Test code is the hotel room of the software world. People are sloppier and more careless than they otherwise would be. I'm not sure why that is. Perhaps because tests are not seen as "real code". But as a testing code base grows from dozens to hundreds to even a thousand or more test cases, having well-factored composable SpecFlow steps becomes critical.
