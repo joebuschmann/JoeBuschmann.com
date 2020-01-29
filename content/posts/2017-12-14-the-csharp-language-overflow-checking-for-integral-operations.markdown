@@ -4,7 +4,7 @@ title: The C# Language - Overflow Checking for Integral Operations
 date: '2017-12-14 23:06:59'
 tags:
 - c-sharp
-- net
+- dotnet
 ---
 
 The C# language has been around for over 15 years. It started off as a Java ripoff and evolved into its own language. Some parts of the language I use daily: enumerators, generics, async/await. Other parts lurk in the shadows until the rare moment when I need to put them to use.

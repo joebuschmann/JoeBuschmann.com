@@ -4,7 +4,7 @@ title: An Introduction to Scoped Bindings in SpecFlow
 date: '2015-10-22 12:28:04'
 tags:
 - specflow
-- net
+- dotnet
 - c-sharp
 ---
 

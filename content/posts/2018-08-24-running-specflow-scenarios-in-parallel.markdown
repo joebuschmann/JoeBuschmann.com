@@ -5,7 +5,7 @@ date: '2018-08-24 22:48:34'
 tags:
 - specflow
 - c-sharp
-- net
+- dotnet
 ---
 
 As of SpecFlow version 2.0, you can run scenarios in parallel. This means faster execution times and faster feedback in your continuous integration process.

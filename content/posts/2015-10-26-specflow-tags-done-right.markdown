@@ -4,7 +4,7 @@ title: SpecFlow Tags Done Right
 date: '2015-10-26 13:30:51'
 tags:
 - specflow
-- net
+- dotnet
 - c-sharp
 ---
 

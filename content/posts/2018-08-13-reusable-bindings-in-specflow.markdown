@@ -6,7 +6,7 @@ tags:
 - specflow
 - c-sharp
 - gherkin
-- net
+- dotnet
 ---
 
 As your application grows, your SpecFlow test suite needs to grow with it. Reusable bindings are essentional to prevent your code from becoming a bloated mess. Fortunately, the SpecFlow runtime has reusability in mind with a built-in inversion of control (IoC) framework and step argument transformations. With these features you can create reusable bindings that make test creation more productive.

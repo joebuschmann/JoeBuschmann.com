@@ -35,5 +35,9 @@ platforms = ["linkedin","github","facebook","twitter","email","rss"]
 [markup.goldmark.renderer]
 unsafe = true
 
-[blackfriday]
-hrefTargetBlank = true
+[markup.highlight]
+codeFences = true
+guessSyntax = false
+lineNos = true
+style = "monokai"
+tabWidth = 4

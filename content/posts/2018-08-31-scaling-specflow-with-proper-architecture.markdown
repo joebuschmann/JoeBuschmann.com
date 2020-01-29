@@ -6,7 +6,7 @@ tags:
 - specflow
 - gherkin
 - c-sharp
-- net
+- dotnet
 ---
 
 > In July of 2018, I gave a talk at [KCDC](http://www.kcdc.info/) titled *SpecFlow: Moving Beyond the Basics*. Afterward, I changed the title to *Scaling SpecFlow* to more accurately reflect the topic. You can find the updated slide deck at https://joebuschmann.github.io/scaling-specflow/.

@@ -4,7 +4,7 @@ title: 'F# Functions: Tuple Syntax'
 slug: f-sharp-functions-tuple-syntax
 date: '2011-07-18 19:35:42'
 tags:
-- net
+- dotnet
 - f-sharp
 ---
 

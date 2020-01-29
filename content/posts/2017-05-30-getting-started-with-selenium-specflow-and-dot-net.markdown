@@ -3,7 +3,7 @@ layout: post
 title: Getting Started with Selenium, SpecFlow, and .NET
 date: '2017-05-30 19:54:01'
 tags:
-- net
+- dotnet
 - specflow
 - selenium
 ---

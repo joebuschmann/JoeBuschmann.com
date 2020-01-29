@@ -3,7 +3,7 @@ layout: post
 title: String.Empty Versus ""
 date: '2015-08-06 15:22:10'
 tags:
-- net
+- dotnet
 - c-sharp
 - best-practices-2
 ---

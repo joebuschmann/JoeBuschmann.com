@@ -6,7 +6,7 @@ tags:
 - specflow
 - gherkin
 - c-sharp
-- net
+- dotnet
 ---
 
 The Gherkin DSL defines data tables as a way of passing a list of values to a step definition. Gherkin tables use the pipe character `|` to delimit column names and values. They're easy to read and understand by both business and technical people.

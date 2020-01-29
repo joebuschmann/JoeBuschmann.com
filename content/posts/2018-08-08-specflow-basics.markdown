@@ -6,7 +6,7 @@ tags:
 - specflow
 - c-sharp
 - gherkin
-- net
+- dotnet
 ---
 
 SpecFlow is hands down my favorite testing tool. I've been blogging about it since 2013 covering mostly advanced topics. In this post, I'll go back to the beginning and briefly cover the basics to give you an idea of what it can do.

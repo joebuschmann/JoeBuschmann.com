@@ -3,7 +3,7 @@ layout: post
 title: The Dangers of Mutable Data
 date: '2011-08-15 20:06:17'
 tags:
-- net
+- dotnet
 - c-sharp
 ---
 

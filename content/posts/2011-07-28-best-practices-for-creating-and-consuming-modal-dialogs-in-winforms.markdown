@@ -3,7 +3,7 @@ layout: post
 title: Best Practices for Creating and Consuming Modal Dialogs in WinForms
 date: '2011-07-28 19:37:55'
 tags:
-- net
+- dotnet
 - c-sharp
 - winforms
 ---

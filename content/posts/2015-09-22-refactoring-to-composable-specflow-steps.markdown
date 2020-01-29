@@ -3,7 +3,7 @@ layout: post
 title: Refactoring to Composable SpecFlow Steps
 date: '2015-09-22 12:15:32'
 tags:
-- net
+- dotnet
 - specflow
 - c-sharp
 ---

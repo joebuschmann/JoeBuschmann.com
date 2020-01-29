@@ -4,7 +4,7 @@ title: SpecFlow Step Definition Report
 date: '2018-08-31 00:42:31'
 tags:
 - specflow
-- net
+- dotnet
 ---
 
 The SpecFlow runtime comes with a little known command line utility aptly named specflow.exe. You can find it in the tools directory in the SpecFlow NuGet package (ex: *\[project]\packages\SpecFlow.2.3.2\tools*). This humble tool can be used to regenerate SpecFlow unit test classes, create test execution reports for NUnit and MSTest, and generate a step definition report. The most useful of these is the step definition report.

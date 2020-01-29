@@ -3,7 +3,7 @@ layout: post
 title: Tidying Up Code with C#'s Using Alias Directives
 date: '2015-08-18 21:52:34'
 tags:
-- net
+- dotnet
 - c-sharp
 ---
 
