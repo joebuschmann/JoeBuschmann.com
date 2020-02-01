@@ -20,7 +20,7 @@ Implementing a queue backed by a table seems simple enough but can be surpisingl
 
 The following table structure could be used for a simple message queue.
 
-```
+```sql
 CREATE TABLE [Queue]
 (
 	[Id] INT IDENTITY(1,1) NOT NULL,
@@ -33,7 +33,7 @@ Notice the `Status` column with values of 1 (READY) and 2 (IN PROGRESS). When a 
 
 The stored procedure to enqueue a message is straightforward.
 
-```
+```sql
 CREATE PROCEDURE EnqueueMessage
 	@message VARBINARY(MAX)
 AS
@@ -55,7 +55,7 @@ Implementing these steps as three separate DML statements introduces a race cond
 
 A better approach would combine all three steps into one DML statement. You can do this with the `OUTPUT` clause, a CTE, and the `ROWLOCK` and `READPAST` hints.
 
-```
+```sql
 CREATE PROCEDURE DequeueMessage
 AS
 BEGIN
@@ -80,7 +80,7 @@ With this approach, three queries are combined into one efficient non-blocking q
 
 Once a consumer has handled the message, it can invoke the following stored procedure to remove its corresponding record from the table.
 
-```
+```sql
 CREATE PROCEDURE CompleteMessage
 	@id INT
 AS
