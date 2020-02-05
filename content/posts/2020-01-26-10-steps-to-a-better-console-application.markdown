@@ -375,9 +375,33 @@ Winston Zeddemore
 
 # Don't Reinvent the Wheel
 
+When your console app supports stdin/stdout/stderr, then its users can leverage the existing ecosystem of command line tools. You don't need to provide paging. Users can pipe into `less`. Need to filter? Use `grep`. Need file IO? Use the redirection operators: `>`, `<`, `>>`.
+
+The following utilities are available for Unix-like environments running Bash and recent versions Command shell for Windows. They are great for building pipelines that process text.
+
+| Utility | Description |
+| ------------- | ------------- |
+| `COMMAND > out.txt` | Redirect stdout to a file. The file is truncated if it exists. |
+| `COMMAND >> out.txt` | Redirect stdout to a file. Append to the file if it exists. |
+| `COMMAND < in.txt` | Redirect a file's contents to stdin. |
+| `less`/`more` | View the contents of a file or stream one page at a time. |
+| `grep` | Search a file or stream for text matching a regular expression and print the results. |
+| `ls` | List the contents of a directory. |
+| `cat` | Reads files or stdin and writes to stdout. |
+| `sed` | Perform text substitution like find and replace on a text stream. |
+| `tr` | Translate, squeeze, and/or delete characters from standard input, writing to standard output. |
+| `sort` | Sorts the text in a stream. |
+| `uniq` | Outputs the unique words in a text stream. |
+
+As an example, the script below reads the source of this blog post and extracts the unique words. All this work is done with existing commands tied together in a pipeline.
+
+```bash
+sed 's/\s/\n/g' < 2020-01-26-10-steps-to-a-better-console-application.markdown | tr '[:upper:]' '[:lower:]' | grep "^\w*$" | grep [^0-9*] | sort | uniq > unique-words.txt
+```
 
 # Have a Structured Data Option
 
+All output text should be human-readable by default. That means simple lists of text delimited by line breaks. If you're writing a script that needs to process the text, an option to output XML or JSON is useful.
 
 # Prompt for Options
 
