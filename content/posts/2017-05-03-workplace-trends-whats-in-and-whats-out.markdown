@@ -7,7 +7,7 @@ tags:
 - off-topic
 ---
 
-"To every thing there is a season" begins Ecclesiastes 3, and if the phase's writer were alive today, he might have had the modern workplace in mind (not really but it makes a good intro). On April 21, I celebrated my 40th birthday, and I've been reflecting on the fads and trends I've seen during my career. What were they? Why did they become popular? Why did they fade away? And, ultimately, what took their place?
+"To every thing there is a season" begins Ecclesiastes 3, and if the phrase's writer were alive today, he might have had the modern workplace in mind (not really but it makes a good intro). On April 21, I celebrated my 40th birthday, and I've been reflecting on the fads and trends I've seen during my career. What were they? Why did they become popular? Why did they fade away? And, ultimately, what took their place?
 
 <style>
   span.out, span.in {
