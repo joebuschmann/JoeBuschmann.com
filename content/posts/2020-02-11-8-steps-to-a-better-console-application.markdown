@@ -1,17 +1,16 @@
 ---
 layout: post
-title: 10 Steps to a Better Console Application
-date: '2020-01-26T00:00:00Z'
-draft: true
+title: 8 Steps to a Better Console Application
+date: '2020-02-11T00:00:00Z'
 tags:
 - dotnet
 - c-sharp
 - cli
 ---
 
-The console application is the workhorse of the software world. It isn't flashy like its graphical cousins the desktop and web app. It isn't sought after like the mobile app. Graphical user interfaces compose images, sophisticated widgets, and animations, but the humble command line interface (CLI) has none of that. It runs in shells with strange names like Bourne-Again Shell (Bash), Korn Shell, and CMD.EXE. Its tools are simple lines of text printed to a terminal or redirected to a file.
+The console application is the workhorse of the software world. It isn't flashy like its graphical cousins the desktop and web app. It isn't sought after like the mobile app. Graphical user interfaces compose images, sophisticated widgets, and animations, but the humble command-line interface (CLI) has none of that. It runs in shells with strange names like Bourne-Again Shell (Bash), Korn Shell, and CMD.EXE. Its tools are simple lines of text printed to a terminal or redirected to a file.
 
-Some of these console apps are ephemeral - created to solve a problem and discarded afterward. Others work hard behind the scenes to support essential services like Google search, social media, and streaming video. Despite its apparent simplicity, writing a good CLI is more difficult than you would expect. Many developers get the basics wrong and limit the effectiveness of their software as a result. In the 1970s, Doug McIlroy first expressed the Unix Philosophy for building apps. It was later summarized by Peter H. Salus in *A Quarter-Century of Unix (1994)*.
+Some of these console apps are ephemeral - created to solve a problem and discarded afterward. Others work hard behind the scenes to support essential services like maintenance and CI/CD. Despite its apparent simplicity, writing a good CLI is more difficult than you would expect. Many developers get the basics wrong and limit the effectiveness of their software as a result. In the 1970s, Doug McIlroy first expressed the Unix Philosophy for building console apps. It was later summarized by Peter H. Salus in *A Quarter-Century of Unix (1994)*.
 
 > The Unix Philosophy
 >
@@ -19,7 +18,7 @@ Some of these console apps are ephemeral - created to solve a problem and discar
 > * Write programs to work together.
 > * Write programs to handle text streams, because that is a universal interface.
 
-Inspired by this philosophy and my own experience, I've compiled 10 design recommendations for a good CLI.
+Inspired by this philosophy and my own experience, I've compiled 8 design recommendations for a good CLI.
 
 # Provide Help in the Terminal
 
@@ -56,9 +55,9 @@ Written by Mike Haertel and others, see <http://git.sv.gnu.org/cgit/grep.git/tre
 
 # Use a Consistent CLI Syntax
 
-Consistency is important for your app's command line interface. Decide up front what kind of syntax the app will need. Will it require subcommands? How will the option flags be structured? Will it accept short names as well as long names?
+Consistency is important for your app's command-line interface. Decide up front what kind of syntax the app will need. Will it require subcommands? How will the option flags be structured? Will it accept short names as well as long names?
 
-Platforms like Kubernetes and AWS provide command line tools for interacting with their services. The syntax is straightforward and consistent.
+Platforms like Kubernetes and AWS provide command-line tools for interacting with their services. The syntax is straightforward and consistent.
 
 ```
 # Kubernetes
@@ -68,7 +67,7 @@ kubectl [command] [TYPE] [NAME] [flags]
 aws [options] <command> <subcommand> [parameters]
 ```
 
-I mentioned using Command Line Parser for providing help automatically. You can also use it to enforce a consistent CLI in .NET apps. It supports subcommands or verbs, short and long names, named and value options, and option groups. The library provides these features via an expressive syntax using attributes. You create one or more option classes to hold the parsed command line arguments. Their properties are decorated with attributes that tell the runtime how to parse the arguments.
+I mentioned using Command Line Parser for providing help automatically. You can also use it to enforce a consistent CLI in .NET apps. It supports subcommands or verbs, short and long names, named and value options, and option groups. The library provides these features via an expressive syntax using attributes. You create one or more option classes to hold the parsed command-line arguments. Their properties are decorated with attributes that tell the runtime how to parse the arguments.
 
 Say we create a (completely redundant) utility for file operations whose features include creating and deleting files. With Command Line Parser, we can enforce the CLI contract using attributes.
 
@@ -128,7 +127,7 @@ Option: 'c, create' is not compatible with: 'd, delete'.
 
 # Use Subcommands for Complex Apps
 
-As your command line tool grows more complex, you may want to use subcommands for segmenting the different functions. Be careful that the subcommands are closely related in purpose to avoid violating item one of the Unix philosophy: *Write programs that do one thing and do it well*.
+As your command-line tool grows more complex, you may want to use subcommands for segmenting the different functions. Be careful that the subcommands are closely related in purpose to avoid violating item one of the Unix philosophy: *Write programs that do one thing and do it well*.
 
 Command Line Parser supports subcommands using the `Verb` attribute. We can rework the `Options` class for our file utility to use subcommands for the `create` and `delete` operations.
 
@@ -164,7 +163,7 @@ File deleted at gb.txt.
 >
 > Doug McIlroy from *The Unix Oral History Project*
 
-Console apps have at their disposal three data streams. They are [standard input](http://www.linfo.org/standard_input.html) (stdin) for input data, [standard output](http://www.linfo.org/standard_output.html) (stdout) for output data, and [standard error](http://www.linfo.org/standard_error.html) (stderr) for error messages. All three streams read or write to the terminal by default, but they can be redirected to read from files or other programs' output (stdin) or write to files or other program's input (stdout and stderr). The syntax to do this is a vertical bar or pipe `|`. You can use pipes to create data processing pipelines that pass data from app to app. There's also additional syntax for reading from a file `<` and writing to a file `>`.
+Console apps have at their disposal three data streams. They are [standard input](http://www.linfo.org/standard_input.html) (stdin) for input data, [standard output](http://www.linfo.org/standard_output.html) (stdout) for output data, and [standard error](http://www.linfo.org/standard_error.html) (stderr) for error messages. All three streams read or write to the terminal by default, but they can be redirected to read from files or other programs' output (stdin) or write to files or other program's input (stdout and stderr). The syntax to do this in Bash or Windows Command shell is a vertical bar or pipe `|`. You can use pipes to create data processing pipelines that pass data from app to app. There's also additional syntax for reading from a file `<` and writing to a file `>`.
 
 ![Shell Pipelines](/images/shell-pipelines.png#c)
 
@@ -236,7 +235,7 @@ Printed 3 of 4.
 Printed 4 of 4.
 ```
 
-# File Input/Output
+# Read and Write Files with Options and Streams
 
 > They all had file arguments; grep had a file argument, and cat had a file argument, and Thompson saw that that wasn't going to fit with this scheme of things and he went in and changed all those programs in the same night.
 >
@@ -375,7 +374,7 @@ Winston Zeddemore
 
 # Don't Reinvent the Wheel
 
-When your console app supports stdin/stdout/stderr, then its users can leverage the existing ecosystem of command line tools. You don't need to provide paging. Users can pipe into `less`. Need to filter? Use `grep`. Need file IO? Use the redirection operators: `>`, `<`, `>>`.
+When your console app supports stdin/stdout/stderr, then its users can leverage the existing ecosystem of command-line tools. You don't need to provide paging. Users can pipe into `less`. Need to filter? Use `grep`. Need file IO? Use the redirection operators: `>`, `<`, `>>`.
 
 The following utilities are available for Unix-like environments running Bash and recent versions Command shell for Windows. They are great for building pipelines that process text.
 
@@ -396,21 +395,105 @@ The following utilities are available for Unix-like environments running Bash an
 As an example, the script below reads the source of this blog post and extracts the unique words. All this work is done with existing commands tied together in a pipeline.
 
 ```bash
-sed 's/\s/\n/g' < 2020-01-26-10-steps-to-a-better-console-application.markdown | tr '[:upper:]' '[:lower:]' | grep "^\w*$" | grep [^0-9*] | sort | uniq > unique-words.txt
+sed 's/\s/\n/g' < 2020-01-26-8-steps-to-a-better-console-application.markdown | tr '[:upper:]' '[:lower:]' | grep "^\w*$" | grep [^0-9*] | sort | uniq > unique-words.txt
 ```
 
 # Have a Structured Data Option
 
-All output text should be human-readable by default. That means simple lists of text delimited by line breaks. If you're writing a script that needs to process the text, an option to output XML or JSON is useful.
+All output text should be human-readable by default, preferably simple lists of text delimited by line breaks, however you should consider adding a structured data option to your apps. Output as JSON or XML is useful for many scripts. The data can be parsed and acted upon in an automated way.
 
-# Prompt for Options
+Let's update our Ghostbusters app to include the option to output the characters in JSON format.
 
+```csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        if (args.Any(arg => arg.ToLower() == "--json"))
+        {
+            List<Actor> actors = new List<Actor>
+            {
+                new Actor(1, "Peter Venkman", "Bill Murray"),
+                new Actor(1, "Raymond Stantz", "Dan Aykroyd"),
+                new Actor(1, "Egon Spengler", "Harold Ramis"),
+                new Actor(1, "Winston Zeddemore", "Ernie Hudson")
+            };
 
-# Config Files and Caches
+            string output = JsonConvert.SerializeObject(actors, Formatting.Indented);
+            
+            Console.Write(output);
+        }
+        else
+        {
+            Console.WriteLine("Peter Venkman");
+            Console.Error.WriteLine("Printed 1 of 4.");
+            Console.WriteLine("Raymond Stantz");
+            Console.Error.WriteLine("Printed 2 of 4.");
+            Console.WriteLine("Egon Spengler");
+            Console.Error.WriteLine("Printed 3 of 4.");
+            Console.WriteLine("Winston Zeddemore");
+            Console.Error.WriteLine("Printed 4 of 4.");
+        }
+    }
+}
+```
 
+Invoking it with the `--json` option gives us an array of objects with an ID, screen name, and actor.
+
+```bash
+$ ./ConsoleApp.exe --json
+[
+  {
+    "ID": 1,
+    "ScreenName": "Peter Venkman",
+    "Name": "Bill Murray"
+  },
+  {
+    "ID": 1,
+    "ScreenName": "Raymond Stantz",
+    "Name": "Dan Aykroyd"
+  },
+  {
+    "ID": 1,
+    "ScreenName": "Egon Spengler",
+    "Name": "Harold Ramis"
+  },
+  {
+    "ID": 1,
+    "ScreenName": "Winston Zeddemore",
+    "Name": "Ernie Hudson"
+  }
+]
+```
+
+Next we consume the output with [jq - a command-line JSON processor][7]. We can filter the contents to just the actor's names.
+
+```bash
+$ ./ConsoleApp.exe --json | jq '.[] | {actor: .Name}'
+{
+  "actor": "Bill Murray"
+}
+{
+  "actor": "Dan Aykroyd"
+}
+{
+  "actor": "Harold Ramis"
+}
+{
+  "actor": "Ernie Hudson"
+}
+```
 
 # Summary
 
+1. Provide Help in the Terminal
+2. Use a Consistent CLI Syntax
+3. Use Subcommands for Complex Apps
+4. Code for Pipes
+5. Don't Cross the Streams
+6. Read and Write Files with Options and Streams
+7. Don't Reinvent the Wheel
+8. Have a Structured Data Option
 
 # References
 
@@ -420,7 +503,8 @@ All output text should be human-readable by default. That means simple lists of 
 * [Unix philosophy][4]
 * [Capturing Standard Input in C#][5]
 * [Command Line Parser][6]
-* [List of Ghostbusters Characters][7]
+* [jq - A Command-Line Processor][7]
+* [List of Ghostbusters Characters][8]
 
 [1]: https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46
 [2]: https://www.zdnet.com/article/good-news-for-developers-the-cli-is-back
@@ -428,4 +512,5 @@ All output text should be human-readable by default. That means simple lists of 
 [4]: https://en.wikipedia.org/wiki/Unix_philosophy
 [5]: https://daveaglick.com/posts/capturing-standard-input-in-csharp
 [6]: https://github.com/commandlineparser/commandline
-[7]: https://en.wikipedia.org/wiki/List_of_Ghostbusters_characters
+[7]: https://stedolan.github.io/jq/
+[8]: https://en.wikipedia.org/wiki/List_of_Ghostbusters_characters
