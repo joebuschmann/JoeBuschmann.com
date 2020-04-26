@@ -15,7 +15,7 @@ As your application grows, your SpecFlow test suite needs to grow with it. Reusa
 
 Before digging into IoC, I'll take a moment to cover why you shouldn't use inheritance in your bindings. I don't have any issues with inheritance in general, but with SpecFlow it can cause problems. The biggest issue is bindings in a base class can cause exceptions to be thrown at runtime. Check out the UML diagram below.
 
-<img src="https://joebuschmann.github.io/scaling-specflow/images/inheritance-whiteboard.png" />
+<img src="/images/inheritance-whiteboard.png" />
 
 It shows a relationship between a base class `Service<TReq, TResp>` and two subclasses `ProductCatalogService` and `OrderService`. The base class contains common state shared among the subclasses as well as common methods for invoking a service endpoint during a test. It handles creating the proxy, serializing the request, and deserializing the response. It also has steps defined and shared among its subclasses.
 
@@ -38,7 +38,22 @@ There's a better way to share state and code. SpecFlow ships with a [lightweight
 
 Using the container is straightforward. Add a dependency to a binding's constructor, and the runtime will provide it. SpecFlow will automatically pick up public classes with a parameterless constructor or a constructor whose dependencies the runtime can resolve. Below is an example.
 
-<script src="https://gist.github.com/joebuschmann/35dcf3145b53ef6ba6dcd44c7aeefdc5.js"></script>
+```csharp
+[Binding]
+public class Search
+{
+    private readonly IWebDriver _webDriver;
+    private readonly ISearchProvider _searchProvider;
+
+    public Search(IWebDriver webDriver, ISearchProvider searchProvider)
+    {
+        _webDriver = webDriver;
+        _searchProvider = searchProvider;
+    }
+
+    // Snip
+}
+```
 
 The `Search` binding has two dependencies: an instance of `IWebDriver` and `ISearchProvider`. It takes them as constructor parameters and saves them to a field variable.
 
@@ -54,13 +69,45 @@ Here are three examples of dependency injection (or DI) in SpecFlow.
 
 #### Example 1: Retrieve the SpecFlow context objects
 
-<script src="https://gist.github.com/joebuschmann/eeb70a7c0029b47e48edcba6f64b6aad.js"></script>
+```csharp
+private readonly ScenarioContext _scenarioContext;
+
+public AddressSteps(ScenarioContext scenarioContext)
+{
+    _scenarioContext = scenarioContext;
+}
+```
 
 You can retrieve metadata provided by the SpecFlow runtime which describes the current scenario. This metadata is contained in the `ScenarioContext` object provided by the framework.
 
 #### Example 2: You can use DI to load the appropriate Selenium web driver
 
-<script src="https://gist.github.com/joebuschmann/f25fed3767299a4bd439605a9138e413.js"></script>
+```csharp
+[Binding]
+public class BootstrapSelenium : IDisposable
+{
+    private readonly IObjectContainer _objectContainer;
+    private IWebDriver _webDriver = null;
+
+    public BootstrapSelenium(IObjectContainer objectContainer)
+    {
+        _objectContainer = objectContainer;
+    }
+
+    [BeforeScenario]
+    public void LoadDriver()
+    {
+        _webDriver = BuildWebDriver();
+        _objectContainer.RegisterInstanceAs(_webDriver, typeof (IWebDriver));
+    }
+
+    // Dispose will be called after scenario execution is complete
+    public void Dispose()
+    {
+        _webDriver?.Quit();
+    }
+}
+```
 
 This example uses a BeforeScenario hook to load the appropriate Selenium web driver for web UI tests. The binding takes an instance of `IObjectContainer` in the constructor. The `BuildWebDriver` method creates an instance of `IWebDriver` using configuration or some other mechanism. Then the instance is registered with the container using `_objectContainer` and made available to bindings.
 
@@ -68,37 +115,114 @@ Note the binding also implements `IDisposable`. SpecFlow will invoke the `Dispos
 
 #### Example 3: You can use tags to conditionally load dependencies
 
-<script src="https://gist.github.com/joebuschmann/b0ccc18f6472f8a10877512074140c4d.js"></script>
+```gherkin
+@json
+Scenario: Invoke service with JSON payload
+  Given a fully populated request object
+  When I invoke the service
+  Then a valid response should be returned
+```
 
 Tags are a Gherkin feature that are useful for annotating a scenario or feature and can drive conditional binding or custom behavior. Tags begin with the "@" character.
 
 The preceding Gherkin uses the tag `@json` to indicate the scenario should be executed using JSON serialization. This scenario validates a service endpoint and needs to use the JSON data exchange format for the request and response data. The endpoint also accepts XML or FormUrlEncoded content.
 
-<script src="https://gist.github.com/joebuschmann/42e77fbac8e5989bacc0ded951116ee9.js"></script>
+```csharp
+[BeforeScenario("xml")]
+public void ConfigureXml()
+{
+    _objectContainer
+        .RegisterTypeAs<XmlBodySerializer, IBodySerializer>();
+}
+
+[BeforeScenario("json")]
+public void ConfigureJson()
+{
+    _objectContainer
+        .RegisterTypeAs<JsonBodySerializer, IBodySerializer>();
+}
+
+[BeforeScenario("formurlencoded")]
+public void ConfigureFormUrlEncoded()
+{
+    _objectContainer
+        .RegisterTypeAs<FormUrlEncodingBodySerializer, IBodySerializer>();
+}
+```
 
 The binding implements three `BeforeScenario` hooks for registering the correct serializer. The options are XML, JSON, and FormUrlEncoded. Only one serializer will be added to the container depending on which tag is used.
 
-<script src="https://gist.github.com/joebuschmann/fd812cde243fccaba85d573aaaad3e8e.js"></script>
+```csharp
+[Binding]
+public sealed class AddressServiceSteps
+{
+    private readonly IBodySerializer _bodySerializer;
+
+    public ContentTypeSteps(IBodySerializer bodySerializer)
+    {
+        _bodySerializer = bodySerializer;
+    }
+
+    // Snip
+}
+```
 
 Other bindings request the correct serializer by adding it to the constructor.
 
 ### What about the Steps class?
 
-It's pretty clear I prefer code reuse via DI over inheritance; however, there is an abstract class `TechTalk.SpecFlow.Steps` in the runtime library you can use as the base class for your bindings. You can check out [the source](https://github.com/techtalk/SpecFlow/blob/master/TechTalk.SpecFlow/Steps.cs) on GitHub. A partial definition is below.
+It's clear I prefer code reuse via DI over inheritance; however, there is an abstract class `TechTalk.SpecFlow.Steps` in the runtime library you can use as the base class for your bindings. You can check out [the source](https://github.com/techtalk/SpecFlow/blob/master/TechTalk.SpecFlow/Steps.cs) on GitHub. A partial definition is below.
 
-<script src="https://gist.github.com/joebuschmann/0472f10c0943d990c3b561b337bf3848.js"></script>
+```csharp
+public abstract class Steps
+{
+    // Built-in context
+    public ScenarioContext ScenarioContext { get; }
+    public FeatureContext FeatureContext { get; }
+    public TestThreadContext TestThreadContext { get; }
+    public ScenarioStepContext StepContext { get; }
+
+    // Call other binding steps
+    public void Given(string step);
+    public void Given(string step, Table tableArg);
+    public void Given(string step, string multilineTextArg);
+    public void Given(string step, string multilineTextArg, Table tableArg);
+
+    // Snip
+}
+```
 
 It's strange that a framework built around DI would provide a base class like `Steps`. It seems to exist for two reasons: 1) to provide access to the scenario, feature, and test metadata and 2) to expose the ability to invoke other Gherkin steps from a binding.
 
-As we have seen, the test metadata like `SenarioContext` can be obtained via DI without the fuss of a base class. This leaves the only other reason you would use `Steps` which is to invoke other steps from a binding. This is actually quite useful. Composite steps can be created to wrap multiple steps into one. Below are two Gherkin steps for building a customer and address
+As we have seen, the test metadata like `ScenarioContext` can be obtained via DI without the fuss of a base class. This leaves the only other reason you would use `Steps` which is to invoke other steps from a binding. This is actually quite useful. Composite steps can be created to wrap multiple steps into one. Below are two Gherkin steps for building a customer and address
 
-<script src="https://gist.github.com/joebuschmann/228dfb72ee99cdc6c24b3d390dfae545.js"></script>
+```gherkin
+Given the customer
+  | Salutation | First Name | Last Name |
+  | Miss       | Liz        | Lemon     |
+And the address
+  | Line 1                | City     | State | Zipcode |
+  | 30 Rockefeller Plaza  | New York | NY    | 10112   |
+```
 
 You may want to combine these into a single composite step. `GivenANewCustomerAndAddress` does just that using `Steps.Given`.
 
-<script src="https://gist.github.com/joebuschmann/3cb5f87fa7e4d60bc469da967bc6f800.js"></script>
+```csharp
+[Given("a new customer and address")]
+public void GivenANewCustomerAndAddress()
+{
+    Table customer = new Table("FirstName", "LastName", "Salutation");
+    customer.AddRow("Miss" "Liz", "Lemon");
 
-Using `Steps` to invoke other binings is not as straightforward as it would seem. In this case, the two tables are created in code using strings for the column names and values. Even worse, the bindings are invoked using string values to identify the target step. The code is messy and fragile. It would be better if this method could be rewritten in a strongly-typed manner.
+    Table address = new Table("Line 1", "City", "State", "Zipcode");
+    address.AddRow("30 Rockefeller Plaza", "New York", "NY", "10112");
+
+    Given("the customer", customer);
+    Given("the address", address);
+}
+```
+
+Using `Steps` to invoke other bindings is not as straightforward as it would seem. In this case, the two tables are created in code using strings for the column names and values. Even worse, the bindings are invoked using string values to identify the target step. The code is messy and fragile. It would be better if this method could be rewritten in a strongly-typed manner.
 
 Fortunately, there is a another way.
 
@@ -108,25 +232,98 @@ Another solution is to invoke the binding steps directly rather than through the
 
 The binding step for creating a customer can be paired with a step argument transformation to move the table argument out and replace it with a strongly typed `Customer` instance.
 
-<script src="https://gist.github.com/joebuschmann/b540d80a0607e2164ba7321887f48820.js"></script>
+```csharp
+[StepArgumentTransformation("the customer")]
+public Customer CreateCustomer(Table table)
+{
+    return table.CreateInstance<Customer>();
+}
 
-The same can be done for the address steps.
+[Given(@"the customer")]
+public void GivenTheCustomer(Customer customer)
+{
+    _customer = customer;
+}
+```
 
-<script src="https://gist.github.com/joebuschmann/0a63d6c690b39418ea9a5c60cfe8b127.js"></script>
+The same can be done for the address step.
 
-With the step argument transformations in place, the composite binding cleans up nicely with the compiler support of strongly typed objects. The customer and address bindings can be invoked safely from code, and they will still bind to the corresponding Gherkin steps.
+```csharp
+[StepArgumentTransformation("the address")]
+public Address CreateAddress(Table table)
+{
+    return table.CreateInstance<Address>();
+}
 
-<script src="https://gist.github.com/joebuschmann/39649b8c20ae6a797fcbd44e8b867d08.js"></script>
+[Given(@"the address")]
+public void GivenTheAddress(Address address)
+{
+    _address = address;
+}
+```
+
+With the step argument transformations in place, the composite binding cleans up nicely with strongly typed objects. The customer and address bindings can be invoked safely from code, and they will still bind to the corresponding Gherkin steps.
+
+```csharp
+[Given("a new customer and address")]
+public void GivenANewCustomerAndAddress()
+{
+    Customer customer = new Customer
+    {
+        Salutation = "Miss",
+        FirstName = "Liz",
+        LastName = "Lemon"
+    };
+
+    Address address = new Address
+    {
+        Line1 = "30 Rockefeller Plaza",
+        City = "New York",
+        State = "NY",
+        Zipcode = "10112"
+    };
+
+    _otherBindings.GivenTheCustomer(customer);
+    _otherBindings.GivenTheAddress(address);
+}
+```
 
 #### Another Example
 
 Step argument tranformations are also useful with other argument types. In the Gherkin, `When I remove the 5th product`, you may want to pass the number 5 as an integer value representing the ordinal position of the product. You could write a binding that captures the value "5th" and parses the argument.
 
-<script src="https://gist.github.com/joebuschmann/0afa3f7ec949d2daffcc15a9719633cd.js"></script>
+```csharp
+[When(@"I remove the (.*) product")]
+public void RemoveProduct(string position)
+{
+    // Position comes in as 1st, 2nd, 3rd, etc.
+    int index = ParsePosition(position);
+
+    // Snip
+}
+```
 
 Parsing arguments in a binding step is an anti-pattern, but you could fix this with a regular expression in the `When` attribute to pull out the numeric value. An even better approach is to create a step argument transformation to extract the index argument. It can even decrement the value by one for immediate consumption by zero-based arrays and lists. Now you have a reusable way of extracting ordinal positions from Gherkin steps.
 
-<script src="https://gist.github.com/joebuschmann/abf036e9fcf4c3e73c3e5ca09c8d6b27.js"></script>
+```csharp
+[StepArgumentTransformation(@"(\d+)(?:st|nd|rd|th)")]
+public int GetIndex(int index)
+{
+    return index - 1;
+}
+
+[When(@"I remove the (.*) product")]
+public void RemoveProduct(int index)
+{
+    _products.RemoveAt(index);
+}
+
+[When(@"I update the (.*) product to (.*)")]
+public void UpdateProduct(int index, string productName)
+{
+    _products[index] = productName;
+}
+```
 
 <hr />
 

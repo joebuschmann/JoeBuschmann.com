@@ -14,17 +14,29 @@ As of SpecFlow version 2.0, you can run scenarios in parallel. This means faster
 
 To enable parallel execution, you must use a test runner that supports it. Available runners include NUnit 3.0, xUnit 2.0, and the SpecFlow+ Runner (specrun). Specrun is a commercial product, but it has advanced features like memory isolation via an app domain or process. NUnit and xUnit don't support memory isolation, so they requre your tests to be thread safe. Also, you won't be able to use the static context properties `ScenarioContext.Current`, `FeatureContext.Current`, and `ScenarioStepContext.Current`. The following code throws a `SpecFlowException` when run in parallel.
 
-<script src="https://gist.github.com/joebuschmann/f47fab40bb754d7d2eae1765fc9b118c.js"></script>
+```csharp
+private readonly ScenarioContext _scenarioContext = ScenarioContext.Current;
+```
 
 You can work around this limitation by using dependency injection. In fact, you should use DI anyway for a cleaner scalable code base. See my post on [Reusable Bindings in SpecFlow](/posts/2018/08/reusable-bindings-in-specflow) for more details on leveraging SpecFlow's IoC container.
 
-<script src="https://gist.github.com/joebuschmann/269873f3149ab7895a06cfa3c0b6849a.js"></script>
+```csharp
+private readonly ScenarioContext _scenarioContext;
+
+public AddressSteps(ScenarioContext scenarioContext)
+{
+    _scenarioContext = scenarioContext;
+}
+```
 
 ### NUnit 3 Support
 
 NUnit 3 requires the assembly-level attribute `Parallelizable` to configure [parallel test execution](https://github.com/nunit/docs/wiki/Parallelizable-Attribute).
 
-<script src="https://gist.github.com/joebuschmann/84da986f8e10f72cd08419b8076c5612.js"></script>
+```csharp
+using NUnit.Framework;
+[assembly: Parallelizable(ParallelScope.Fixtures)]
+```
 
 ### Hooks
 

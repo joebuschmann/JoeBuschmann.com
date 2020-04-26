@@ -22,7 +22,7 @@ Inspired by this philosophy and my own experience, I've compiled 8 design recomm
 
 # Provide Help in the Terminal
 
-![Help](/images/help-button-2.jpg#c)
+![Help](/images/help-button.jpg#c)
 
 A good README or online documentation is fine, but help in the terminal is divine. It's more accessible and allows users to stay in the terminal. You should support several different ways to diplay help.
 

@@ -8,6 +8,8 @@ tags:
 - sql-server
 ---
 
+![Duck Queue](/images/duck-queue.jpg#c)
+
 Any sufficiently large enterprise software application is going to need a queue at some point. A queue is a good way to introduce an asynchronous process and decouple two parts of a system. For example, a user could upload a large file to a web application for processing, and instead of making the user wait for the work to complete, the application could queue up the work and return immediately. Later, when the results are ready, the user could be notified.
 
 The best way to do this is to introduce a message broker like [RabbitMQ](https://www.rabbitmq.com/). With RabbitMQ, not only do you get simple queues with a single subscriber, but you can set up exchanges with multiple subscribers. But taking the leap with an enterprise message broker may be a step too far. Sometimes all you need is a simple queue without the overhead of introducing new middleware.

@@ -17,11 +17,25 @@ While they work great in Gherkin, tables don't translate well to strongly typed 
 
 Before digging in, a word about vertical and horizontal tables. Vertical tables have two columns. The first contains the field names, and the second contains the values. Vertical tables can only be mapped to a single .NET object, not lists or collections.
 
-<script src="https://gist.github.com/joebuschmann/02829300cb545ecd1dfa9af615c26ad4.js"></script>
+```gherkin
+# A vertical table
+
+| Field   | Value                |
+| Line 1  | 30 Rockefeller Plaza |
+| City    | New York             |
+| State   | NY                   |
+| Zipcode | 10112                |
+```
 
 Horizontal tables have three or more columns. They are more flexible because they can be mapped to a list of objects. The first row defines the field names and each subsequent row holds the values for an item in the list.
 
-<script src="https://gist.github.com/joebuschmann/47894d5023ef737efcde0d75130d8860.js"></script>
+```gherkin
+# A horizontal table
+
+| Line 1                | City     | State | Zipcode |
+| 30 Rockefeller Plaza  | New York | NY    | 10112   |
+| 311 South Wacker Dr   | Chicago  | IL    | 60606   |
+```
 
 ### Table values should be atomic
 
@@ -29,11 +43,24 @@ Table values should be as atomic as possible to simplify the .NET bindings comsu
 
 The following Gherkin is a good example of what not to do. The first value is a full name including salutation. Names are normally divided into salutation, first name, and last name in code for storage and manipulation. The underlying binding will have to parse this value which is error prone. Same for the address. The different parts of the address (line1, city, state, and zip code) are delimited by a semi-colon. What if the person who created the Gherkin forgets the correct delimiter? Again this approach is error prone.
 
-<script src="https://gist.github.com/joebuschmann/6b256eb93d81092ed75b874c1a9a4476.js"></script>
+```gherkin
+Scenario: Build a customer
+  Given the customer
+    | Name           | Address                                   |
+    | Miss Liz Lemon | 30 Rockefeller Plaza; New York; NY; 10112 |
+```
 
 A better approach is to break up the name and address into atomic parts in the Gherkin. Each component is clearly defined. The name has separate columns for the salutation, first name, and last name. Similarly, the address is broken up into line1, city, state, and zip code. As we'll see in the next section, the .NET bindings simplify further with table helpers.
 
-<script src="https://gist.github.com/joebuschmann/fe4147f06bddd8a419d81fbe0e8c2381.js"></script>
+```gherkin
+Scenario: Build a customer
+  Given the customer
+    | Salutation | First Name | Last Name |
+    | Miss       | Liz        | Lemon     |
+  And the address
+    | Line 1                | City     | State | Zipcode |
+    | 30 Rockefeller Plaza  | New York | NY    | 10112   |
+```
 
 ### Table helpers make working with tables easier
 
@@ -41,19 +68,53 @@ Like I mentioned earlier, the Gherkin language includes tables for passing compl
 
 A common pattern is to convert tables into strongly typed .NET objects in step definitions. In fact there are a number of helper extension methods in the SpecFlow runtime library for converting tables into objects and comparing tabular data to object data. These helpers can go a long way to clean up bindings.
 
-<script src="https://gist.github.com/joebuschmann/5a245e10e6187fc1d8185a9e869f321a.js"></script>
+```csharp
+[Given(@"the following address")]
+public void GivenTheFollowingAddress(Table table)
+{
+    Address address = new Address();
 
-In this example, the given step builds out an `Address` object by manually iterating the rows and columns of the incoming table. This code is prone to errors due to the lack of type safety, and not to mention it takes a lot of keystrokes. The `CreateInstance` extention method reduces it to one line.
+    address.Line1 = table.Rows[0]["Line 1"];
+    address.Line2 = table.Rows[0]["Line 2"];
+    address.City = table.Rows[0]["City"];
+    address.State = table.Rows[0]["State"];
+    address.Zipcode = table.Rows[0]["Zipcode"];
+}
+```
 
-<script src="https://gist.github.com/joebuschmann/f6d6297087922aea16d077af7e8a5b3f.js"></script>
+In this example, the given step builds out an `Address` object by manually iterating the rows and columns of the incoming table. This code is prone to errors due to the lack of type safety, and not to mention it takes a lot of keystrokes. The `CreateInstance` extension method reduces it to one line.
+
+```csharp
+[Given(@"the following address")]
+public void GivenTheFollowingAddress(Table table)
+{
+    Address address = table.CreateInstance<Address>();
+}
+```
 
 In a similar way, SpecFlow has helper methods for comparing tables to objects.
 
-<script src="https://gist.github.com/joebuschmann/9af894b5c721299fde4c748d4944c5e1.js"></script>
+```csharp
+[Then(@"the address is")]
+public void ValidateAddress(Table table)
+{
+    Assert.AreEqual(table.Rows[0]["Line 1"], _address.Line1);
+    Assert.AreEqual(table.Rows[0]["Line 2"], _address.Line2);
+    Assert.AreEqual(table.Rows[0]["City"], _address.City);
+    Assert.AreEqual(table.Rows[0]["State"], _address.State);
+    Assert.AreEqual(table.Rows[0]["Zipcode"], _address.Zipcode);
+}
+```
 
 `ValidateAddress` compares each table value field by field. Again, you can collapse this code down to a single line.
 
-<script src="https://gist.github.com/joebuschmann/92180ebe7834d67afd1fada42dc2bd54.js"></script>
+```csharp
+[Then(@"the address is")]
+public void ValidateAddress(Table table)
+{
+    table.CompareToInstance(_address);
+}
+```
 
 #### TechTalk.SpecFlow.Assist
 
@@ -73,13 +134,32 @@ SpecFlow will ignore whitespace and casing when matching table column names to o
 
 SpecFlow defines the `TableAliases` attribute for these situations. Using this attribute, you can provide alternate mappings between a table column name and an object property name. The runtime will include these mappings when you invoke the table helpers.
 
-<script src="https://gist.github.com/joebuschmann/1c12785b58e305ee3c97e9b3c51c7235.js"></script>
+```csharp
+public class Address
+{
+    [TableAliases("Street")]
+    public string Line1 { get; set; }
 
-The example above provides the alias "Province" for "State" and "Postal Code" for "Zip Code" among others. Now you can properly specifiy a Canadian address.
+    [TableAliases("Township", "Village", "Municipality")]
+    public string City { get; set; }
 
-Also note that table aliases support regular expressions.
+    [TableAliases("Province")]
+    public string State { get; set; }
 
-<script src="https://gist.github.com/joebuschmann/a4781bf01146c75389add9a894b7e36a.js"></script>
+    [TableAliases("Zip", "Zip\\s*Code", "Postal\\s*Code")]
+    public string Zipcode { get; set; }
+}
+```
+
+The example above provides the alias "Province" for "State" and "Postal Code" for "Zip Code" among others. Note that table aliases support regular expressions.
+
+Now you can properly specifiy a Canadian address.
+
+```gherkin
+Given the address
+  | Street          | Village | Province | Postal Code |
+  | 110 Prairie Way | Elkhorn | Manitoba | P5A 0A4     |
+```
 
 ### Customize value mappings
 
@@ -87,11 +167,33 @@ Like field mappings, SpecFlow allows developers to customize how table values ar
 
 Let's say you want to update the address step with a new Location column. Location data consists of latitude and longitude values in parentheses and separated by a comma.
 
-<script src="https://gist.github.com/joebuschmann/4966b3f1a1f83aaf9294240190d35b77.js"></script>
+```gherkin
+
+Given the address
+  | Street          | Village | Province | Postal Code | Location |
+  | 110 Prairie Way | Elkhorn | Manitoba | P5A 0A4     | (42, 88) |
+```
 
 You want to map this value to a new property on the custom `Address` data type called Location. The property is of type `GeoLocation` which has properties for the latitude and longitude.
 
-<script src="https://gist.github.com/joebuschmann/e50d1679ea8406dacac84eaaa8752795.js"></script>
+```csharp
+public class Address
+{
+    [TableAliases("Street")]
+    public string Line1 { get; set; }
+
+    [TableAliases("Township", "Village")]
+    public string City { get; set; }
+
+    [TableAliases("Province")]
+    public string State { get; set; }
+
+    [TableAliases("Zip", "Zip\\s*Code", "Postal\\s*Code")]
+    public string Zipcode { get; set; }
+
+    public GeoLocation Location { get; set; }
+}
+```
 
 Of course the SpecFlow runtime doesn't know about the GeoLocation type, but you can use custom implementations of `IValueRetriever` and `IValueComparer` to tell the runtime how to do the conversions. Value retrievers take a table value and convert it into an instance of a .NET type. Value comparers take a .NET type and compare it to a table value to determine equivalence. If the two values aren't equivalent, the runtime throws an exception, and the test fails.
 
@@ -99,19 +201,61 @@ Of course the SpecFlow runtime doesn't know about the GeoLocation type, but you 
 
 `IValueRetriever` defines two methods. The first, `CanRetrieve`, returns a boolean value indicating if the value retriever can handle the specified property type. In this example, if the incoming property type is `GeoLocation`, then it returns true. The second method, `Retrieve`, performs the work of converting the string value from the table into an instance of the target type which, in this case, is `GeoLocation`.
 
-<script src="https://gist.github.com/joebuschmann/4058287e99d16aa6068a947235d15a43.js"></script>
+```csharp
+public bool CanRetrieve(KeyValuePair<string, string> keyValuePair,
+    Type targetType, Type propertyType)
+{
+    return propertyType == typeof(GeoLocation);
+}
+
+public object Retrieve(KeyValuePair<string, string> keyValuePair,
+    Type targetType, Type propertyType)
+{
+    string coordinates = keyValuePair.Value;
+    GeoLocation location;
+
+    if (TryGetLocation(coordinates, out location))
+        return location;
+
+    throw new Exception(
+        $"Unable to parse the location coordinates {coordinates}.");
+}
+```
 
 #### IValueComparer
 
 `IValueComparer` is very similar in that it defines two methods, `CanCompare` and `Compare`. `CanCompare` is provided the property value from the target .NET object. In this case, if it is of type `GeoLocation`, then the method returns true indicating it can handle the comparison. The second method, `Compare`, is passed the same actual value and the expected string value from the table. The method does the work of comparing the two to determine equality. If it returns false, the test fails.
 
-<script src="https://gist.github.com/joebuschmann/700b16a22e2b59c60d944d11498be8e3.js"></script>
+```csharp
+public bool CanCompare(object actualValue)
+{
+    return actualValue is GeoLocation;
+}
+
+public bool Compare(string expectedValue, object actualValue)
+{
+    GeoLocation expectedLocation;
+
+    if (TryGetLocation(expectedValue, out expectedLocation))
+        return expectedLocation.Equals(actualValue);
+
+    return false;
+}
+```
 
 #### Register Value Mappings
 
 For the SpecFlow runtime to pick up custom value handlers, they have to be registered in a `BeforeTestRun` hook. `GeoLocationValueHandler` implements both interfaces and is passed to methods on `Service.Instance`. The runtime can now work with location values in the binding steps.
 
-<script src="https://gist.github.com/joebuschmann/47eb7c3ad02d10876e26df6a5a1271f3.js"></script>
+```csharp
+[BeforeTestRun]
+public static void RegisterValueMappings()
+{
+    var geoLocationValueHandler = new GeoLocationValueHandler();
+    Service.Instance.RegisterValueRetriever(geoLocationValueHandler);
+    Service.Instance.RegisterValueComparer(geoLocationValueHandler);
+}
+```
 
 <hr />
 

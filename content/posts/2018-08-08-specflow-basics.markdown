@@ -39,15 +39,40 @@ The [NuGet package](https://www.nuget.org/packages/specflow/) contains the runti
 
 Once SpecFlow is installed, you're ready to **specify** your first feature.
 
-<script src="https://gist.github.com/joebuschmann/e81792bbc820d0c282102d0550aee406.js"></script>
+```gherkin
+Feature: GoogleSearch
+  In order to find information on the internet
+  As a user of the Google search engine
+  I want to perform a search
+
+Scenario: Perform a Google Search
+  Given a browser loaded with Google's web page
+  When I search for "kittens"
+  Then Google should return valid search results
+```
 
 Next you **bind** the Gherkins steps to executable code. Note the `Binding` attribute is applied to all binding classes. The `Given`, `When`, `Then` attributes bind to the individual Gherkin steps.
 
-<script src="https://gist.github.com/joebuschmann/bc00698fb976b049b5f54040e906abf6.js"></script>
+```csharp
+[Binding]
+public class GoogleSearch
+{
+    public GoogleSearch() { // Snip }
+
+    [Given(@"a browser loaded with Google's web page")]
+    public void LoadWebPage() { // Snip }
+
+    [When(@"I search for (.*)")]
+    public void Search(string searchTerm) { // Snip }
+
+    [Then(@"Google should return valid search results")]
+    public void ValidateSearchResults() { // Snip }
+}
+```
 
 Finally you **run** the tests with a test runner. In this case, it's NUnit.
 
-```
+```bat
 nunit-console.exe /xml:results.xml some\path\tests.dll
 ```
 
