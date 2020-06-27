@@ -8,9 +8,7 @@ tags:
 - cli
 ---
 
-The console application is the workhorse of the software world. It isn't flashy like its graphical cousins the desktop and web app. It isn't sought after like the mobile app. Graphical user interfaces compose images, sophisticated widgets, and animations, but the humble command-line interface (CLI) has none of that. It runs in shells with strange names like Bourne-Again Shell (Bash), Korn Shell, and CMD.EXE. Its tools are simple lines of text printed to a terminal or redirected to a file.
-
-Some of these console apps are ephemeral - created to solve a problem and discarded afterward. Others work hard behind the scenes to support essential services like maintenance and CI/CD. Despite its apparent simplicity, writing a good CLI is more difficult than you would expect. Many developers get the basics wrong and limit the effectiveness of their software as a result. In the 1970s, Doug McIlroy first expressed the Unix Philosophy for building console apps. It was later summarized by Peter H. Salus in *A Quarter-Century of Unix (1994)*.
+Despite its apparent simplicity, writing a good console application is more difficult than you would expect. Many developers get the basics wrong and limit the effectiveness of their software as a result. In the 1970s, Doug McIlroy first expressed the Unix Philosophy for building apps with a good CLI. It was later summarized by Peter H. Salus in *A Quarter-Century of Unix (1994)*.
 
 > The Unix Philosophy
 >
@@ -18,7 +16,7 @@ Some of these console apps are ephemeral - created to solve a problem and discar
 > * Write programs to work together.
 > * Write programs to handle text streams, because that is a universal interface.
 
-Inspired by this philosophy and my own experience, I've compiled 8 design recommendations for a good CLI.
+Inspired by this philosophy and my own experience, I've compiled 8 design recommendations for console apps.
 
 # Provide Help in the Terminal
 
