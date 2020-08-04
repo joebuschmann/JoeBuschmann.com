@@ -340,17 +340,13 @@ class Program
         // Get the output stream
         Stream outputStream;
 
-        if (Console.IsOutputRedirected)
-        {
-            outputStream = Console.OpenStandardOutput();
-        }
-        else if (args.Length > 1)
+        if (args.Length > 1)
         {
             outputStream = File.OpenWrite(args[1]);
         }
         else
         {
-            throw new ArgumentException("No output file provided.");
+            outputStream = Console.OpenStandardOutput();
         }
         
         // Copy from input to output
@@ -412,9 +408,9 @@ class Program
             List<Actor> actors = new List<Actor>
             {
                 new Actor(1, "Peter Venkman", "Bill Murray"),
-                new Actor(1, "Raymond Stantz", "Dan Aykroyd"),
-                new Actor(1, "Egon Spengler", "Harold Ramis"),
-                new Actor(1, "Winston Zeddemore", "Ernie Hudson")
+                new Actor(2, "Raymond Stantz", "Dan Aykroyd"),
+                new Actor(3, "Egon Spengler", "Harold Ramis"),
+                new Actor(4, "Winston Zeddemore", "Ernie Hudson")
             };
 
             string output = JsonConvert.SerializeObject(actors, Formatting.Indented);
@@ -447,17 +443,17 @@ $ ./ConsoleApp.exe --json
     "Name": "Bill Murray"
   },
   {
-    "ID": 1,
+    "ID": 2,
     "ScreenName": "Raymond Stantz",
     "Name": "Dan Aykroyd"
   },
   {
-    "ID": 1,
+    "ID": 3,
     "ScreenName": "Egon Spengler",
     "Name": "Harold Ramis"
   },
   {
-    "ID": 1,
+    "ID": 4,
     "ScreenName": "Winston Zeddemore",
     "Name": "Ernie Hudson"
   }
